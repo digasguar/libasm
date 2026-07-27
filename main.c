@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 
 size_t ft_strlen(const char *str);
 char *ft_strcpy(char *dest, const char *src);
 int ft_strcmp(const char *s1, const char *s2);
+size_t ft_write(int fd, const void *buf, size_t count);
 
 int main(void)
 {
@@ -34,7 +36,15 @@ int main(void)
     printf("ft_strcmp: %d\n\n", ft_strcmp(s5, s5));
 
     printf("strcmp : %d\n", strcmp(s5, s1));
-    printf("ft_strcmp: %d\n", ft_strcmp(s5, s1));
+    printf("ft_strcmp: %d\n\n", ft_strcmp(s5, s1));
 
+
+    ft_write(1, "Hola desde ft_write\n", 20);
+
+
+    size_t ret = ft_write(-1, "Hola\n", 5);
+    printf("ret = %zd\n", ret);
+    printf("errno = %d\n", errno);
+    printf("%s\n", strerror(errno));
     return 0;
 }
