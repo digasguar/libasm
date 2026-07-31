@@ -7,8 +7,9 @@ size_t ft_strlen(const char *str);
 char *ft_strcpy(char *dest, const char *src);
 int ft_strcmp(const char *s1, const char *s2);
 size_t ft_write(int fd, const void *buf, size_t count);
+size_t ft_read(int fd, void *buf, size_t count);
 
-int main(void)
+/* int main(void)
 {
     char *str = "Hola mundo";
     char *result= malloc(sizeof(str));
@@ -46,5 +47,50 @@ int main(void)
     printf("ret = %zd\n", ret);
     printf("errno = %d\n", errno);
     printf("%s\n", strerror(errno));
+
+
+    printf("_______________________________________________________________\n");
+    char buffer[100];
+    size_t read_ret;
+
+    printf("Escribe algo: ");
+    fflush(stdout);
+
+    ret = ft_read(0, buffer, sizeof(buffer) - 1);
+
+    if (ret == -1)
+    {
+        perror("ft_read");
+        return 1;
+    }
+
+    buffer[ret] = '\0';
+
+    printf("Bytes leídos: %zd\n", ret);
+    printf("Contenido: \"%s\"\n", buffer);
+    return 0;
+} */
+
+int main(void)
+{
+    char buffer[100];
+    ssize_t ret;
+
+    printf("Escribe algo: ");
+    fflush(stdout);
+
+    ret = ft_read(-1, buffer, sizeof(buffer) - 1);
+
+    if (ret == -1)
+    {
+        perror("ft_read");
+        return 1;
+    }
+
+    buffer[ret] = '\0';
+
+    printf("\nBytes leídos: %zd\n", ret);
+    printf("Contenido: \"%s\"\n", buffer);
+
     return 0;
 }
